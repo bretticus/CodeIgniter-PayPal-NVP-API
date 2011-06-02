@@ -15,7 +15,8 @@ $config['paypal_lib_nvp_log_file'] = BASEPATH . 'logs/paypal_nvp.log';
 $config['paypal_lib_log'] = TRUE;
 
 // What is the default currency?
-$config['paypal_lib_currency_code'] = 'GBP';
+$config['paypal_lib_currency_code'] = 'USD';
+$config['paypal_lib_country_code'] = 'US';
 
 //PayPal account email
 $config['paypal_account'] = '';
