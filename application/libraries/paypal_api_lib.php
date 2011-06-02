@@ -5,9 +5,10 @@ if (!defined('BASEPATH'))
 
 class Paypal_Api_Lib {
 
-    protected $nvps = array();
-    protected $nvp_data = array();
+    protected $nvps = array();    
     protected $CI;
+    
+    public $nvp_data = array();
 
     public function __construct() {
 

@@ -4,7 +4,7 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 /**
- * Provide API calla for Website Payments Pro Payflow transactions.
+ * Provide API calls for Website Payments Pro Payflow transactions.
  *
  * @author bmillett
  */
@@ -18,7 +18,8 @@ class Paypal_wpppf_lib extends Paypal_Api_Lib {
     const PAYTYPE_AUTH = 'Authorization';
 
     /**
-     * Send a DoDirectPayment request to payment API.
+     * Send a DoDirectPayment request to payment API. Returns TRUE on success or
+     * an aray of error messages on failure.
      *
      * @param string $first
      * @param string $last
@@ -33,7 +34,7 @@ class Paypal_wpppf_lib extends Paypal_Api_Lib {
      * @param string $card_type
      * @param string $payment_action
      * @param string $invoice_num
-     * @return string 
+     * @return mixed 
      */
     public function do_direct_payment($first, $last, $address, $address2, $city, 
             $state, $zip, $amount, $card_num, $card_cvv2, $card_type='Visa', 
@@ -55,7 +56,13 @@ class Paypal_wpppf_lib extends Paypal_Api_Lib {
         if ( !is_null($invoice_num) )
             $this->add_nvp('INVNUM', $invoice_num);
         
-        return $this->send_api_call('DoDirectPayment');
+        $success = $this->send_api_call('DoDirectPayment');
+        
+        if ( $success ) {
+            return TRUE;
+        } else {
+            $errors = explode("\n", $this->return_nvp_errors());
+        }
     }
 
     /**
