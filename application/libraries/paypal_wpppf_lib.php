@@ -61,7 +61,7 @@ class Paypal_wpppf_lib extends Paypal_Api_Lib {
         if ( $success ) {
             return TRUE;
         } else {
-            $errors = explode("\n", $this->return_nvp_errors());
+            return explode("\n", $this->return_nvp_errors());
         }
     }
 
